@@ -5,10 +5,10 @@ using UnityEngine;
 // Finite State Machine (유한 상태 머신)
 // 객체가 가질 수 있는 여러가지 상태중에, 현재 상태를 딱 하나로 고정
 
-public class Player : MonoBehaviour
+/*public class Player : MonoBehaviour
 {
 
-}
+}*/
 
 public enum MonsterState
 {
