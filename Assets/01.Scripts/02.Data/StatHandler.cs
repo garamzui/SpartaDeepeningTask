@@ -43,4 +43,10 @@ public class StatHandler : MonoBehaviour
         currentStats[statType] -= amount;
     }
 
+    private void LevelHandle()
+    {
+        
+        
+    }
+
 }
