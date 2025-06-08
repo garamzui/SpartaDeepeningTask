@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 public class UIManager : SingleTon<UIManager>
 {
-   public GameManager gm;
+  
 
     protected override void Awake()
     {
@@ -15,7 +15,7 @@ public class UIManager : SingleTon<UIManager>
     }
     private void Start()
     {
-        gm = GameManager.Instance;
+     
     }
     
 }

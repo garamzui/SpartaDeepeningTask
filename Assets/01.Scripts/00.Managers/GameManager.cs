@@ -8,7 +8,7 @@ public class GameManager : SingleTon <GameManager>
     public Player Player{ get; private set; }
     public Item Item{ get; private set; }
 
-    public UIManager um;
+   
     
     protected override void Awake()
     {
@@ -20,6 +20,6 @@ public class GameManager : SingleTon <GameManager>
     {
         Player = FindObjectOfType<Player>();
         Item = FindObjectOfType<Item>();
-        um = UIManager.Instance;
+      
     }
 }
