@@ -1,4 +1,4 @@
-
+//by.지웅 튜터님
 using UnityEngine;
 
 public interface IDondestroy { }

@@ -1,18 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : SingleTon <GameManager>, IDondestroy
+public class GameManager : SingleTon <GameManager>
 {
-    // Start is called before the first frame update
-    void Start()
+    public Player Player{ get; private set; }
+    public Item Item{ get; private set; }
+
+    public UIManager um;
+    
+    protected override void Awake()
     {
+        base.Awake();
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        Player = FindObjectOfType<Player>();
+        Item = FindObjectOfType<Item>();
+        um = UIManager.Instance;
     }
 }
