@@ -6,16 +6,12 @@ using UnityEngine.Serialization;
 
 public class UIManager : SingleTon<UIManager>
 {
-  
+  public StatusPreView status;
 
-    protected override void Awake()
-    {
-        base.Awake();
-        
-    }
+  
     private void Start()
     {
-     
+     status = GetComponentInChildren<StatusPreView>(true);//매개변수 true넣으면 off되어있는 오브젝트도 찾아올 수 있음 
     }
     
 }

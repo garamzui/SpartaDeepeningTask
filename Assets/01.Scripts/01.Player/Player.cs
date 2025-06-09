@@ -7,6 +7,11 @@ public class Player : MonoBehaviour
 {
 
     public StatHandler statHandler;
-    
-   
+
+
+    void Start()
+    {
+        statHandler = GetComponent<StatHandler>();
+
+    }
 }
