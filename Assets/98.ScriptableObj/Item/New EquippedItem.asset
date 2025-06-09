@@ -9,14 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 335a35feef4f517488bca70363665701, type: 3}
   m_Name: New EquippedItem
-  m_EditorClassIdentifier: Assembly-CSharp::EquippedItem
+  m_EditorClassIdentifier: 
   itemName: 
   discription: 
+  useAbleLevel: 0
+  icon: {fileID: 0}
+  itemPrefab: {fileID: 0}
   itemType: 0
   damage: 0
   defense: 0
   isEquipped: 0
+  isEnchantable: 0
+  enchantedDamage: 0
+  enchantedDefense: 0
+  enchantLevel: 0
   price: 0
   isTradable: 0

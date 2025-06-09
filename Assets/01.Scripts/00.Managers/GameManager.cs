@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameManager : SingleTon <GameManager>
 {
     public Player Player{ get; private set; }
-    public Item Item{ get; private set; }
+  
 
    
     
@@ -19,7 +19,7 @@ public class GameManager : SingleTon <GameManager>
     private void Start()
     {
         Player = FindObjectOfType<Player>();
-        Item = FindObjectOfType<Item>();
+       
       
     }
 }
