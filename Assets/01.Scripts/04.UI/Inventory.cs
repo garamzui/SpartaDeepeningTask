@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public List<Item> items = new List<Item>();
+    public GameObject itemSlotPrefab;
+    public GameObject content;
+[Button]
+    void GetItem()
     {
-        
+        Instantiate(itemSlotPrefab, content.transform);
     }
 
-    // Update is called once per frame
-    void Update()
+    void ThrowItem()
     {
-        
     }
 }
