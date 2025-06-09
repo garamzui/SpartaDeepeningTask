@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New EquippedItem", menuName = "ItemDatas/EquippedItem")]
-public class EquippedItem : ItemData
+[CreateAssetMenu(fileName = "New EquipmentItem", menuName = "ItemDatas/EquipmentItem")]
+public class EquipmentItem : ItemData
 {
     public EquipItemType itemType;
     public float damage;
@@ -13,6 +13,5 @@ public class EquippedItem : ItemData
     public float enchantedDamage;
     public float enchantedDefense;
     public float enchantLevel;
-    public float price;
-    public bool isTradable;
+   
 }

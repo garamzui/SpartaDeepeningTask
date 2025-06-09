@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
@@ -13,24 +14,38 @@ public class Inventory : MonoBehaviour
 
     public GameObject content;
 
-    
-    [Button]
+
+    private void Awake()
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            GameObject newSlot = Instantiate(itemSlotPrefab, content.transform);
+            slots.Add(newSlot);
+        }
+    }
+
 
     void GetItem(GameObject itemPrefab)
     {
-        
         Item newItem = Instantiate(itemPrefab).GetComponent<Item>();
         items.Add(newItem);
-        GameObject newSlot = Instantiate(itemSlotPrefab, content.transform);
-        slots.Add(newSlot);
-        Slot slotComponent = newSlot.GetComponent<Slot>();
+       
+        for (int i = 0; i < slots.Count; i++)
+        {
+            Slot slotComponent = slots[i].GetComponent<Slot>();
 
-        slotComponent.icon.sprite = newItem.itemDataHandler.itemData.icon;
-        
+           
+            if (slotComponent.icon.sprite == null)
+            {
+                slotComponent.icon.sprite = newItem.itemDataHandler.itemData.icon;
+                return;
+            }
+        }
+            GameObject newSlot = Instantiate(itemSlotPrefab, content.transform);
+            slots.Add(newSlot);
+            newSlot.GetComponent<Slot>().icon.sprite = newItem.itemDataHandler.itemData.icon;
+      
     }
 
-    void ThrowItem()
-    {
-        /*UIManager.In*/
-    }
+    
 }

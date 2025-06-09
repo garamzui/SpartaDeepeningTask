@@ -6,9 +6,9 @@ public class ItemDataHandler : MonoBehaviour
 {
     public ItemData itemData ;
 
-    public void TryEnchantItem()
+    public void TryEnchantItem()//아이템 강화시도 매서드
     {
-        if (itemData is EquippedItem equippedItem)
+        if (itemData is EquipmentItem equippedItem)
         {
             if (!equippedItem.isEnchantable)
             {
@@ -36,7 +36,7 @@ public class ItemDataHandler : MonoBehaviour
 
     private void SucessEnchantItem()
     {
-        if (itemData is EquippedItem equippedItem)
+        if (itemData is EquipmentItem equippedItem)
         {
             equippedItem.enchantLevel += 1;
             

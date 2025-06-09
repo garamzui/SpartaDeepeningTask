@@ -9,6 +9,6 @@ public class ResourceItem : ItemData
     public float valueAmount;
     public float stackAmount;
     public bool isStackable;
-    public float price;
-    public bool isTradable;
+    public float maxStackAmount;
+    
 }

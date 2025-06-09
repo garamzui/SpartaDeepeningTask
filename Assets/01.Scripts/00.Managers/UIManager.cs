@@ -8,7 +8,7 @@ public class UIManager : SingleTon<UIManager>
 {
     public StatusPreView status;
     public Inventory inventory;
-    public Slot slot;
+    public ItemInfo itemInfo;
     public MainUI mainUI;
     public SetButton setButton;
 
@@ -18,6 +18,6 @@ public class UIManager : SingleTon<UIManager>
         inventory = GetComponentInChildren<Inventory>(true);
         mainUI = GetComponentInChildren<MainUI>(true);
         setButton = GetComponentInChildren<SetButton>(true);
-        slot = GetComponentInChildren<Slot>(true);
+        itemInfo = GetComponentInChildren<ItemInfo>(true);
     }
 }

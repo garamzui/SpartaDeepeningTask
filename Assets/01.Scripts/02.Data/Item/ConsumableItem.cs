@@ -11,6 +11,5 @@ public class ConsumableItem : ItemData
     public float stackAmount;
     public bool isConsumable;
     public bool isStackable;
-    public float price;
-    public bool isTradable;
+   public float maxStackAmount;
 }

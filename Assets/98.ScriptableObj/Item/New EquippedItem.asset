@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: 
   discription: 
   useAbleLevel: 0
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: f76bb628b17b6974db9c575594606cb0, type: 3}
   itemPrefab: {fileID: 0}
   itemType: 0
   damage: 0

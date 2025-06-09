@@ -22,13 +22,17 @@ public enum ResourceType
 }
 
 
+
+
 //메뉴에 아이템 테이터 ScriptableObject로 생성
 
 public abstract class ItemData : ScriptableObject
 {
     public string itemName;
-    public string discription;
+    public string description;
     public int useAbleLevel;
+    public float price;
+    public bool isTradable;
     public Sprite icon;
     public GameObject itemPrefab;
 }
