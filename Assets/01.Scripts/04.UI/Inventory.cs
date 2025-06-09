@@ -9,11 +9,11 @@ public class Inventory : MonoBehaviour
     public GameObject itemSlotPrefab;
     public GameObject content;
 [Button]
-    void GetItem(Item item)
+    void GetItem(/*Item item*/)
     {
         GameObject newSlot = Instantiate (itemSlotPrefab, content.transform);
         
-        items.Add(item);
+        /*items.Add(item);*/
         
        
   

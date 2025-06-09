@@ -2,8 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemStatHandler : MonoBehaviour
+public class ItemDataHandler : MonoBehaviour
 {
     public ItemData itemData;
+ 
+   
 
+    private void Awake()
+    {
+      
+    }
+
+    
+       
 }
