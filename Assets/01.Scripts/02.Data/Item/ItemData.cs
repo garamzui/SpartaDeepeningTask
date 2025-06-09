@@ -26,7 +26,7 @@ public enum ResourceType
 
 //메뉴에 아이템 테이터 ScriptableObject로 생성
 
-public abstract class ItemData : ScriptableObject
+public abstract class ItemData 
 {
     public string itemName;
     public string description;

@@ -45,6 +45,8 @@ public class ItemInfo : MonoBehaviour
 
     public void InitSetInfo()
     {
+        
+        
         icon.sprite = slot.item.itemDataHandler.itemData.icon;
         itemName.text = slot.item.itemDataHandler.itemData.itemName;
         itemDescription.text = slot.item.itemDataHandler.itemData.description;

@@ -24,10 +24,10 @@ public class Inventory : MonoBehaviour
         }
     }
 
-
-    void GetItem(GameObject itemPrefab)
+[Button]
+    void GetItem(/*GameObject itemPrefab*/)
     {
-        Item newItem = Instantiate(itemPrefab).GetComponent<Item>();
+        Item newItem = Instantiate(itemPrefab).GetComponent<Item>();//오브젝트가 아니라 인스턴스만 만들기 <<<---
         items.Add(newItem);
        
         for (int i = 0; i < slots.Count; i++)
@@ -38,6 +38,7 @@ public class Inventory : MonoBehaviour
             if (slotComponent.icon.sprite == null)
             {
                 slotComponent.icon.sprite = newItem.itemDataHandler.itemData.icon;
+                slotComponent.item = newItem;
                 return;
             }
         }

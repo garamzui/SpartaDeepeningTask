@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 335a35feef4f517488bca70363665701, type: 3}
   m_Name: New EquippedItem
   m_EditorClassIdentifier: 
-  itemName: 
-  discription: 
-  useAbleLevel: 0
+  itemName: "\uC751\uAC00"
+  description: "\uC8FD\uC744\uAC70\uAC19\uC544\uC694"
+  useAbleLevel: 1
+  price: 1
+  isTradable: 1
   icon: {fileID: 21300000, guid: f76bb628b17b6974db9c575594606cb0, type: 3}
   itemPrefab: {fileID: 0}
   itemType: 0
-  damage: 0
-  defense: 0
-  isEquipped: 0
-  isEnchantable: 0
-  enchantedDamage: 0
+  damage: 5
+  defense: 1
+  isEquipped: 1
+  isEnchantable: 1
+  enchantedDamage: 123
   enchantedDefense: 0
-  enchantLevel: 0
-  price: 0
-  isTradable: 0
+  enchantLevel: 1

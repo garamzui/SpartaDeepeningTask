@@ -12,12 +12,16 @@ public class Slot : MonoBehaviour
     public GameObject equipmentMark;
     public GameObject stackAmountMark;
 
-    private void Start()
+    void Awake()
     {
+        
     }
 
     public void OnClickInfo()
-    {  UIManager.Instance.itemInfo.slot = this;
+    {  
+        if (icon.sprite == null)return;
+       
+        UIManager.Instance.itemInfo.slot = this;
         UIManager.Instance.itemInfo.InfoWIndowOnAndOff();
     }
     public void ONDestroySlot()
