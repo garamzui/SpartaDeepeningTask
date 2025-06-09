@@ -13,7 +13,7 @@ public class ItemInfo : MonoBehaviour
     public GameObject stackAmount;
     public GameObject equipped;
     public GameObject equipButton;
-    [FormerlySerializedAs("equipText")] public TextMeshProUGUI equipButtonText;
+    public TextMeshProUGUI equipButtonText;
     public GameObject throwButton;
     public TextMeshProUGUI itemName;
     public TextMeshProUGUI itemDescription;
@@ -32,21 +32,18 @@ public class ItemInfo : MonoBehaviour
         if (this.gameObject.activeInHierarchy)
         {
             this.gameObject.SetActive(false);
-           ResetInfo();
-           slot =  null;
+            ResetInfo();
+            slot = null;
         }
         else if (!this.gameObject.activeInHierarchy)
         {
             this.gameObject.SetActive(true);
             InitSetInfo();
         }
-
     }
 
     public void InitSetInfo()
     {
-        
-        
         icon.sprite = slot.item.itemDataHandler.itemData.icon;
         itemName.text = slot.item.itemDataHandler.itemData.itemName;
         itemDescription.text = slot.item.itemDataHandler.itemData.description;
@@ -85,7 +82,7 @@ public class ItemInfo : MonoBehaviour
             }
 
             equipButton.gameObject.SetActive(true);
-           
+
             if (EI.isEquipped)
             {
                 equipButtonText.text = "장착해제";
