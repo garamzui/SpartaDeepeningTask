@@ -2,6 +2,18 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //아이템 타입을 정의 
+public enum ItemName
+{
+    Potato,
+    Hyovyeen,
+    Sword,
+    Spatula,
+    HandOfNiceSon,
+    Stone,
+    HPPotion,
+    StonePotato
+}
+
 public enum EquipItemType
 {
     Weapon,
@@ -26,8 +38,10 @@ public enum ResourceType
 
 //메뉴에 아이템 테이터 ScriptableObject로 생성
 
-public abstract class ItemData : ScriptableObject 
+public abstract class ItemData : ScriptableObject
 {
+    public ItemName itemDataName;
+   
     public string itemName;
     public string description;
     public int useAbleLevel;

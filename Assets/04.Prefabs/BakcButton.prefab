@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 964735525467449581}
   - component: {fileID: 2074735559049738025}
   - component: {fileID: 3935103003133093355}
-  - component: {fileID: 6617021600299841786}
+  - component: {fileID: 2398626451320780376}
   m_Layer: 0
   m_Name: BakcButton
   m_TagString: Untagged
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6617021600299841786}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SetButton, Assembly-CSharp
         m_MethodName: OnOpenWindow
         m_Mode: 1
@@ -133,7 +133,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &6617021600299841786
+--- !u!114 &2398626451320780376
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

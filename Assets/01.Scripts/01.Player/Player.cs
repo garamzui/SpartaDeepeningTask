@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
-    public StatHandler statHandler;
+private Inventory inventory;
+  
+public StatHandler statHandler;
 
 
     void Start()
     {
         statHandler = GetComponent<StatHandler>();
-
+        inventory = UIManager.Instance.inventory;
     }
 }

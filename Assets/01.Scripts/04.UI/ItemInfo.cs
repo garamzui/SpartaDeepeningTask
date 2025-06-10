@@ -44,11 +44,11 @@ public class ItemInfo : MonoBehaviour
 
     public void InitSetInfo()
     {
-        icon.sprite = slot.item.itemDataHandler.itemData.icon;
-        itemName.text = slot.item.itemDataHandler.itemData.itemName;
-        itemDescription.text = slot.item.itemDataHandler.itemData.description;
-        itemUseableLevel.text = $"사용 가능 Lv : {slot.item.itemDataHandler.itemData.useAbleLevel.ToString()}";
-        if (slot.item.itemDataHandler.itemData.isTradable)
+        icon.sprite = slot.item.itemData.icon;
+        itemName.text = slot.item.itemData.itemName;
+        itemDescription.text = slot.item.itemData.description;
+        itemUseableLevel.text = $"사용 가능 Lv : {slot.item.itemData.useAbleLevel.ToString()}";
+        if (slot.item.itemData.isTradable)
         {
             tradable.text = "거래가능";
         }
@@ -57,9 +57,9 @@ public class ItemInfo : MonoBehaviour
             tradable.text = "거래 불가능";
         }
 
-        itemPrice.text = $"가격 : {slot.item.itemDataHandler.itemData.price}원";
+        itemPrice.text = $"가격 : {slot.item.itemData.price}원";
 
-        if (slot.item.itemDataHandler.itemData is EquipmentItem EI)
+        if (slot.item.itemData is EquipmentItem EI)
         {
             itemType.text = $" 타입 : {EI.itemType.ToString()}";
             if (EI.enchantLevel == 0)
@@ -95,7 +95,7 @@ public class ItemInfo : MonoBehaviour
             }
         }
 
-        if (slot.item.itemDataHandler.itemData is ConsumableItem CI)
+        if (slot.item.itemData is ConsumableItem CI)
         {
             itemType.text = $" 타입 : {CI.itemType.ToString()}";
             itemValue1.text = $"회복량 : {CI.valueAmount}";
@@ -111,7 +111,7 @@ public class ItemInfo : MonoBehaviour
             }
         }
 
-        if (slot.item.itemDataHandler.itemData is ResourceItem RI)
+        if (slot.item.itemData is ResourceItem RI)
         {
             itemType.text = $" 타입 : {RI.itemType.ToString()}";
             itemValue1.text = string.Empty;

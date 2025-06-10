@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemDataHandler : MonoBehaviour
+public class ItemDataHandler : SingleTon<ItemDataHandler>
 {
-    public ItemData itemData ;
-
-    public void TryEnchantItem()//아이템 강화시도 매서드
+    protected override void Awake()
     {
-        if (itemData is EquipmentItem equippedItem)
+        base.Awake();
+    }
+
+    public void TryEnchantItem(Item item)//아이템 강화시도 매서드
+    {
+        if (item.itemData is EquipmentItem equippedItem)
         {
             if (!equippedItem.isEnchantable)
             {
@@ -20,7 +23,7 @@ public class ItemDataHandler : MonoBehaviour
             float enchantProbability = Random.Range(0, 9);
             if (enchantProbability <= enchantProbabilityPerLevel)
             {
-                SucessEnchantItem();
+                SucessEnchantItem(item);
             }
 
             else
@@ -34,9 +37,9 @@ public class ItemDataHandler : MonoBehaviour
         }
     }
 
-    private void SucessEnchantItem()
+    private void SucessEnchantItem(Item item)//강화 성공시 매서드
     {
-        if (itemData is EquipmentItem equippedItem)
+        if (item.itemData is EquipmentItem equippedItem)
         {
             equippedItem.enchantLevel += 1;
             
@@ -71,9 +74,9 @@ public class ItemDataHandler : MonoBehaviour
     {
     }
 
-    public void Stacked()
+    public void Stacked(Item item)
     {
-        if (itemData is ResourceItem resourceItem  )
+        if (item.itemData is ResourceItem resourceItem  )
         {
             if (resourceItem.isStackable)
             {
@@ -81,7 +84,7 @@ public class ItemDataHandler : MonoBehaviour
             }
 
         }
-        else if (itemData is ConsumableItem consumableItem)
+        else if (item.itemData is ConsumableItem consumableItem)
         {
            if (consumableItem.isStackable)
                {
@@ -91,9 +94,9 @@ public class ItemDataHandler : MonoBehaviour
 
     }
 
-    public void UnstackItem()
+    public void UnstackItem(Item item)
     {
-        if (itemData is ResourceItem resourceItem  )
+        if (item.itemData is ResourceItem resourceItem  )
         {
             if (resourceItem.isStackable)
             {
@@ -101,7 +104,7 @@ public class ItemDataHandler : MonoBehaviour
             }
 
         }
-        else if (itemData is ConsumableItem consumableItem)
+        else if (item.itemData is ConsumableItem consumableItem)
         {
             if (consumableItem.isStackable)
             {

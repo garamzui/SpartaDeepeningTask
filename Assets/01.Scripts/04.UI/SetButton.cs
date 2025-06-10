@@ -1,16 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class SetButton : MonoBehaviour
 {
-   public GameObject objToOpen;
-   public GameObject objToClose;
+   public GameObject [] objToOpen;
+   public GameObject [] objToClose;
   public void OnOpenWindow()
    {
-      objToOpen.gameObject.SetActive(true);
-      objToClose.gameObject.SetActive(false);
+       for(int i=0;i<objToOpen.Length;i++)
+       {objToOpen[i].SetActive(true);}
+     
+       for(int i=0;i<objToClose.Length;i++)
+      { objToClose[i].SetActive(false);}
    }
    
 }

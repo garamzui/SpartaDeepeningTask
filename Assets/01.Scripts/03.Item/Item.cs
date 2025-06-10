@@ -2,15 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public class Item 
 {
-    public ItemDataHandler itemDataHandler;
-    
-   
-    
-    
-    void Start()
+    public ItemData itemData;
+    private int ID= 0;
+
+    public Item(ItemName name,int itemID)
     {
-        itemDataHandler = GetComponent<ItemDataHandler>();
+        if (DataManager.Instance.ItemsForName.TryGetValue(name, out var data))
+        {
+            itemData = data;
+        }
+        else
+        {
+            Debug.LogError($"[Item] '{name}'is Null");
+        }
+
+        ID = itemID;
     }
+
+
+    
 }
