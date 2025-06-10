@@ -15,7 +15,7 @@ public class ItemManager : SingleTon<ItemManager>
         int ID = itemID++;
         Item item = new Item(name,ID);
         allItems.Add(item);
-       
+       Debug.Log(ID);
         return item;
     }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ public class Slot : MonoBehaviour
     public Image icon;
     public GameObject equipmentMark;
     public GameObject stackAmountMark;
-
+    public TextMeshProUGUI stackAmountText;
     void Awake()
     {
     }
@@ -35,32 +36,44 @@ public class Slot : MonoBehaviour
             }
         }
 
-        if (item.itemData is ConsumableItem || item.itemData is ResourceItem)
+        if ( item.itemData is ResourceItem RI )
         {
             stackAmountMark.SetActive(true);
+            stackAmountText.text = RI.stackAmount.ToString(); 
+        }
+        
+        if (item.itemData is ConsumableItem CI)
+        {
+            stackAmountMark.SetActive(true);
+            stackAmountText.text = CI.stackAmount.ToString(); 
         }
     }
 
     public void ONDestroySlot()
     {
-        if (UIManager.Instance.inventory.slots.Count <= 9)
-        {
-            ResetSlot();
-            return;
-        }
-
-        if (item.itemData is EquipmentItem EI)
-        {
-            if (EI.isEquipped)
+        
+            /*
+            if (UIManager.Instance.inventory.slots.Count <= 9)
             {
-                Debug.Log("아이템 장착을 해제하쇼");
+                ResetSlot();
                 return;
             }
-        }
+            */
 
+            if (item.itemData is EquipmentItem EI)
+            {
+                if (EI.isEquipped)
+                {
+                    Debug.Log("아이템 장착을 해제하쇼");
+                    return;
+                }
+            }
 
-        UIManager.Instance.inventory.slots.Remove(this.gameObject);
-        Destroy(this.gameObject);
+            ResetSlot();
+            UIManager.Instance.inventory.slots.Remove(this.gameObject);
+            Destroy(this.gameObject);
+            UIManager.Instance.inventory.slot = null;
+        
     }
 
     public void ResetSlot()

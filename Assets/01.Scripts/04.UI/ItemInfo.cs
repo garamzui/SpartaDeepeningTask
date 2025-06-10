@@ -15,6 +15,7 @@ public class ItemInfo : MonoBehaviour
     public GameObject equipButton;
     public TextMeshProUGUI equipButtonText;
     public GameObject throwButton;
+    public GameObject enchantButton;
     public TextMeshProUGUI itemName;
     public TextMeshProUGUI itemDescription;
     public TextMeshProUGUI itemUseableLevel;
@@ -33,11 +34,13 @@ public class ItemInfo : MonoBehaviour
         {
             this.gameObject.SetActive(false);
             ResetInfo();
+            
             slot = null;
         }
         else if (!this.gameObject.activeInHierarchy)
         {
             this.gameObject.SetActive(true);
+            
             InitSetInfo();
         }
     }
@@ -81,6 +84,7 @@ public class ItemInfo : MonoBehaviour
                 }
             }
 
+            enchantButton.gameObject.SetActive(true);
             equipButton.gameObject.SetActive(true);
 
             if (EI.isEquipped)
@@ -101,6 +105,7 @@ public class ItemInfo : MonoBehaviour
             itemValue1.text = $"회복량 : {CI.valueAmount}";
             itemValue2.text = string.Empty;
             equipButton.gameObject.SetActive(false);
+            enchantButton.gameObject.SetActive(false);
             if (CI.isStackable)
             {
                 stackAmount.SetActive(true);
@@ -117,6 +122,7 @@ public class ItemInfo : MonoBehaviour
             itemValue1.text = string.Empty;
             itemValue2.text = string.Empty;
             equipButton.gameObject.SetActive(false);
+            enchantButton.gameObject.SetActive(false);
             if (RI.isStackable)
             {
                 stackAmount.SetActive(true);

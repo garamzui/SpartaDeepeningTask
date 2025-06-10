@@ -12,6 +12,7 @@ public class Inventory : MonoBehaviour
     public GameObject itemSlotPrefab;//슬롯 프리팹
     public GameObject content; //슬롯 생성되는 스크롤 뷰의 콘텐트 오브젝트
 
+    public GameObject slot;
 
     private void Awake()
     {
@@ -24,7 +25,7 @@ public class Inventory : MonoBehaviour
 
    
 
-    public void GetItem(Item item)
+    public void AddItem(Item item)
     {
         items.Add(item);
 
@@ -47,5 +48,35 @@ public class Inventory : MonoBehaviour
 
     }
 
-    
+    public void FindOpenSlot()
+    {
+        
+         for(int i=0;i<slots.Count;i++)
+        {
+            if (slots[i].GetComponent<Slot>().item.ID == UIManager.Instance.itemInfo.slot.item.ID)
+            {
+                slot = slots[i];
+                return;  
+            }
+          
+
+
+        }
+        Debug.Log (slot.GetComponent<Slot>().item.ID);
+    }
+   
+    public void RemoveItem()
+    {
+        FindOpenSlot();
+        slot.GetComponent<Slot>().ONDestroySlot();
+        UIManager.Instance.itemInfo.InfoWIndowOnAndOff();
+        if (slots.Count < 9)
+        {
+            GameObject newSlot = Instantiate(itemSlotPrefab, content.transform);
+            slots.Add(newSlot);
+        }
+        /*slots.Sort((a, b) => a.GetComponent<Slot>().item.ID.CompareTo(b.GetComponent<Slot>().item.ID)); */
+    }
+
+
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Item 
 {
     public ItemData itemData;
-    private int ID= 0;
+    public int ID= 0;
 
     public Item(ItemName name,int itemID)
     {
