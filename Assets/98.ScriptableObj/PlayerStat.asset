@@ -12,13 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c99a91cd1821bf944b10aec3bd00ea41, type: 3}
   m_Name: PlayerStat
   m_EditorClassIdentifier: 
-  characterName: "\uC751\uAC00"
+  characterName: "\uC774\uB984"
   stats:
   - statType: 0
     baseValue: 100
   - statType: 1
-    baseValue: 0
+    baseValue: 100
   - statType: 2
     baseValue: 0
   - statType: 3
+    baseValue: 100
+  - statType: 4
+    baseValue: 15000
+  - statType: 5
     baseValue: 1
+  - statType: 6
+    baseValue: 10
+  - statType: 7
+    baseValue: 1
+  - statType: 8
+    baseValue: 5
+  - statType: 9
+    baseValue: 0

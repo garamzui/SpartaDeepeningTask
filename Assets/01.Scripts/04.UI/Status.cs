@@ -13,14 +13,16 @@ public class Status : MonoBehaviour
     public TextMeshProUGUI damageText;
     public TextMeshProUGUI defenceText;
 
-    void SetStatus()
+    public void SetStatus()
     {
-        nameText.text = GameManager.Instance.Player.statHandler.statData.characterName;
-        levelText.text = GameManager.Instance.Player.statHandler.GetStat(StatType.Level).ToString();
-        expText.text = GameManager.Instance.Player.statHandler.GetStat(StatType.EXP).ToString();
-        moneyText.text = GameManager.Instance.Player.statHandler.GetStat(StatType.Money).ToString();
-        hpText.text = GameManager.Instance.Player.statHandler.GetStat(StatType.Health).ToString();
-        damageText.text = GameManager.Instance.Player.statHandler.GetStat(StatType.Damage).ToString();
-        defenceText.text = GameManager.Instance.Player.statHandler.GetStat(StatType.Defence).ToString();
+        var GM = GameManager.Instance.Player.statHandler;
+        nameText.text ="이름 :"+GM.statData. characterName;
+        levelText.text ="레벨 : "+ GM.GetStat(StatType.Level).ToString();
+        expText.text = $"경험치 : {GM.GetStat(StatType.EXP)}/{GM.GetStat(StatType.NecessaryEXP)}";
+        moneyText.text = "소지금 :" +GM.GetStat(StatType.Money).ToString();
+        hpText.text = $"체력 : {GM.GetStat(StatType.Health)}/{GM.GetStat(StatType.MAXHealth)}";
+        damageText.text = $"공격력 :  {GM.GetStat(StatType.Damage)} <color=#00FFFF>+{GM.GetStat(StatType.EnchantedDamage)} </color>";
+        defenceText.text =$"방어력 :  {GM.GetStat(StatType.Defence)} <color=#00FFFF>+ {GM.GetStat(StatType.EnchantedDefence)}</color>";
     }
 }
+

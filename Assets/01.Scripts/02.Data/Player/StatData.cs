@@ -6,11 +6,15 @@ using UnityEngine;
 public enum StatType
 {
     Health,
+    MAXHealth,
     EXP,
+    NecessaryEXP,
     Money,
     Level,
     Damage,
-    Defence
+    EnchantedDamage,
+    Defence,
+    EnchantedDefence
 }
 //메뉴에 스탯 테이터 ScriptableObject로 생성
 [CreateAssetMenu(fileName = "New StatData", menuName = "Stats/Chracter Stats")]

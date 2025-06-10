@@ -8,11 +8,14 @@ public class Player : MonoBehaviour
 private Inventory inventory;
   
 public StatHandler statHandler;
-
+public GameObject weaponPivot;
+public GameObject currentEquipmentWeapon;
+public GameObject currentEquipmentArmor;
 
     void Start()
     {
         statHandler = GetComponent<StatHandler>();
         inventory = UIManager.Instance.inventory;
+      
     }
 }

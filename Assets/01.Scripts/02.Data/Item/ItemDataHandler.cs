@@ -62,12 +62,16 @@ public class ItemDataHandler : SingleTon<ItemDataHandler>
     {
     }
 
-    public void EquipItem()
+    public void EquipItem(Item item)
     {
+        GameObject obj = Instantiate(item.itemData.itemPrefab, GameManager.Instance.Player.weaponPivot.transform.localPosition, Quaternion.identity);
+       GameManager.Instance.Player.currentEquipmentWeapon = obj;
     }
 
     public void UnEquipItem()
     {
+       Destroy(GameManager.Instance.Player.currentEquipmentWeapon); 
+       GameManager.Instance.Player.currentEquipmentWeapon =  null;
     }
 
     public void ThrowItem()

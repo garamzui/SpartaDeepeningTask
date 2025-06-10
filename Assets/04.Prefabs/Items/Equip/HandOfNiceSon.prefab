@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4395218497379438838}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 8244820431726532128}
   - component: {fileID: 4049624229660968992}
   - component: {fileID: 6584502914550060953}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HandOfNiceSon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

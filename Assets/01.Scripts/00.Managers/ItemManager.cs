@@ -15,7 +15,7 @@ public class ItemManager : SingleTon<ItemManager>
         int ID = itemID++;
         Item item = new Item(name,ID);
         allItems.Add(item);
-       Debug.Log(ID);
+       Debug.Log($"새 인스턴스 생성. 이름 : {item.itemData.itemName} 아이템 ID : {ID}");
         return item;
     }
 

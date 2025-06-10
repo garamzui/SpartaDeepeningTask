@@ -159,4 +159,20 @@ public class ItemInfo : MonoBehaviour
         // 버튼 텍스트 초기화
         equipButtonText.text = "";
     }
+
+    public void OnInfoEquipItem()
+    {
+        var gm = GameManager.Instance.Player.currentEquipmentWeapon;
+        if (gm == null)
+        {
+            ItemDataHandler.Instance.EquipItem(slot.item);
+            equipped.SetActive(true);
+             
+        }
+        else
+        {
+            ItemDataHandler.Instance.UnEquipItem();
+            equipped.SetActive(false);
+        }
+    }
 }
