@@ -87,16 +87,7 @@ public class ItemInfo : MonoBehaviour
             enchantButton.gameObject.SetActive(true);
             equipButton.gameObject.SetActive(true);
 
-            if (EI.isEquipped)
-            {
-                equipButtonText.text = "장착해제";
-                equipped.SetActive(true);
-            }
-            else
-            {
-                equipButtonText.text = "장착";
-                equipped.SetActive(false);
-            }
+           
         }
 
         if (slot.item.itemData is ConsumableItem CI)
@@ -167,12 +158,18 @@ public class ItemInfo : MonoBehaviour
         {
             ItemDataHandler.Instance.EquipItem(slot.item);
             equipped.SetActive(true);
+            slot.equipmentMark.SetActive(true);
+            equipButtonText.text = "장착해제";
              
         }
         else
         {
-            ItemDataHandler.Instance.UnEquipItem();
+            ItemDataHandler.Instance.UnEquipItem(slot.item);
             equipped.SetActive(false);
+            slot.equipmentMark.SetActive(false);
+            equipButtonText.text = "장착";
         }
     }
+    
+ 
 }

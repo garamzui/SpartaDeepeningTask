@@ -83,4 +83,5 @@ public class Slot : MonoBehaviour
         equipmentMark.SetActive(false);
         stackAmountMark.SetActive(false);
     }
+    
 }
