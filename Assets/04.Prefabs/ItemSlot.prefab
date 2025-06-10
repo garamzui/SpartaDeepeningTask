@@ -280,9 +280,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 9065242822864753187}
-  item: {fileID: 0}
   equipmentMark: {fileID: 3628619176734596338}
   stackAmountMark: {fileID: 3774893369409542302}
+  stackAmountText: {fileID: 7145439818903356729}
 --- !u!222 &8300079450564534960
 CanvasRenderer:
   m_ObjectHideFlags: 0
