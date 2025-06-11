@@ -173,6 +173,23 @@ public class ItemInfo : MonoBehaviour
         equipButtonText.text = "";
     }
 
+    public void UsingConsumItem()
+    {
+        if (slot.item.itemData.useAbleLevel > GameManager.Instance.Player.statHandler.GetStat(StatType.Level))
+        {
+            UIManager.Instance.SystemMessage("레벨이 부족합니다.");
+            return;
+        }
+        else if (GameManager.Instance.Player.statHandler.GetStat(StatType.Health) == GameManager.Instance.Player.statHandler.GetStat(StatType.MAXHealth))
+        {
+            UIManager.Instance.SystemMessage($"이미 최대 체력입니다. ");
+            return;
+        }
+        ItemDataHandler.Instance.UsingConsumeItem(slot.item);
+        slot.ONDestroySlot();
+        UIManager.Instance.statusPreView.TextReFresh();
+    }
+
     public void OnInfoEquipItem()
     {
         var gm = GameManager.Instance.Player.currentEquipmentWeaponData;
