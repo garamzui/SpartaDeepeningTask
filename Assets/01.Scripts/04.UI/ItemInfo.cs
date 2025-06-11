@@ -1,4 +1,5 @@
 using System;
+using NaughtyAttributes.Test;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -52,7 +53,15 @@ public class ItemInfo : MonoBehaviour
         itemName.text = slot.item.itemData.itemName;
         itemDescription.text = slot.item.itemData.description;
 
-        itemUseableLevel.text = $"사용 가능 Lv : {slot.item.itemData.useAbleLevel.ToString()}";
+        if (slot.item.itemData.useAbleLevel > GameManager.Instance.Player.statHandler.GetStat(StatType.Level))
+        {
+            itemUseableLevel.text = $"사용 가능 Lv : <color=#FF0000>{slot.item.itemData.useAbleLevel.ToString()}</color>";
+        }
+        else
+        {
+            itemUseableLevel.text = $"사용 가능 Lv : {slot.item.itemData.useAbleLevel.ToString()}";
+        }
+
         if (slot.item.itemData.isTradable)
         {
             tradable.text = "거래가능";
@@ -168,11 +177,15 @@ public class ItemInfo : MonoBehaviour
     {
         var gm = GameManager.Instance.Player.currentEquipmentWeaponData;
 
-       
-        
 
         if (gm == null)
         {
+            if (slot.item.itemData.useAbleLevel > GameManager.Instance.Player.statHandler.GetStat(StatType.Level))
+            {
+                UIManager.Instance.SystemMessage("레벨이 부족합니다.");
+                return;
+            }
+
             ItemDataHandler.Instance.EquipItem(slot.item);
             InitSetInfo();
             slot.SetSlot(slot.item);
@@ -183,7 +196,8 @@ public class ItemInfo : MonoBehaviour
             {
                 UIManager.Instance.SystemMessage("먼저 착용하고 있는 장비를 해제 하세요");
                 return;
-            }    
+            }
+
             ItemDataHandler.Instance.UnEquipItem(slot.item);
             InitSetInfo();
             slot.SetSlot(slot.item);
