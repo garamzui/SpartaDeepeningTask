@@ -91,12 +91,21 @@ public class TestUI : MonoBehaviour
 
     public void OnPotato()
     {
+        if (!UIM.inventory.gameObject.activeInHierarchy)
+        {UIM.SystemMessage("인벤토리를 열고 시도해 주세요 ");
+            return;
+        }
+
         Item potato = IM.CreateItem(ItemName.Potato);
         UIM.inventory.AddItem(potato);
     }
 
     public void OnHONS()
     {
+        if (!UIM.inventory.gameObject.activeInHierarchy)
+        {UIM.SystemMessage("인벤토리를 열고 시도해 주세요 ");
+            return;
+        }
         Item HONS = IM.CreateItem(ItemName.HandOfNiceSon);
         UIM.inventory.AddItem(HONS);
     }

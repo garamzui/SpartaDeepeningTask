@@ -250,6 +250,7 @@ public class ItemInfo : MonoBehaviour
 
         ItemDataHandler.Instance.UsingConsumeItem(slot.item);
         slot.ONDestroySlot();
+        UIManager.Instance.inventory.SetDefaultSlotCount();
         UIManager.Instance.statusPreView.TextReFresh();
     }
 
