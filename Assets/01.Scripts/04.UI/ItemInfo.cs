@@ -116,7 +116,7 @@ public class ItemInfo : MonoBehaviour
             else if (level == 0)
             {  itemGrade.text = "커먼";}
             else
-            {  itemGrade.text = $"<color={GetEnchantColor(level)}>+{GetGradeName(level)}</color>";}
+            {  itemGrade.text = $"<color={GetEnchantColor(level)}>등급 : {GetGradeName(level)}</color>";}
 
             itemType.text = $" 타입 : {EI.itemType.ToString()}";
             if (slot.item.insEnchantLevel == 0)
@@ -192,7 +192,7 @@ public class ItemInfo : MonoBehaviour
             }
         }
     }
-    private string GetEnchantColor(float level)
+    private string GetEnchantColor(float level) //GPT가 제안해준 매서드 리팩터링 
     {
         if (level < 4) return "#32CD32";
         if (level < 7) return "#9400D3";
