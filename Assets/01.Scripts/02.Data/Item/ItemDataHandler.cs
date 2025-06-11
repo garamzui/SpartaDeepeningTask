@@ -9,7 +9,7 @@ public class ItemDataHandler : SingleTon<ItemDataHandler>
         base.Awake();
     }
 
-    public void TryEnchantItem(Item item)//아이템 강화시도 매서드
+    public void TryEnchantItem(Item item) //아이템 강화시도 매서드
     {
         if (item.itemData is EquipmentItem equippedItem)
         {
@@ -19,7 +19,7 @@ public class ItemDataHandler : SingleTon<ItemDataHandler>
                 return;
             }
 
-            float enchantProbabilityPerLevel = 9 - equippedItem.enchantLevel;
+            float enchantProbabilityPerLevel = 9 - item.insEnchantLevel;
             float enchantProbability = Random.Range(0, 9);
             if (enchantProbability <= enchantProbabilityPerLevel)
             {
@@ -28,7 +28,7 @@ public class ItemDataHandler : SingleTon<ItemDataHandler>
 
             else
             {
-                Debug.Log("실패다 짜식아");
+                UIManager.Instance.SystemMessage("강화 실패!");
             }
         }
         else
@@ -37,23 +37,24 @@ public class ItemDataHandler : SingleTon<ItemDataHandler>
         }
     }
 
-    private void SucessEnchantItem(Item item)//강화 성공시 매서드
+    private void SucessEnchantItem(Item item) //강화 성공시 매서드
     {
         if (item.itemData is EquipmentItem equippedItem)
         {
-            equippedItem.enchantLevel += 1;
-            
+            item.insEnchantLevel += 1;
+            item.insEnchantPotencial -=1;
             if (equippedItem.itemType == EquipItemType.Weapon)
             {
-                equippedItem.enchantedDamage += equippedItem.enchantLevel * (equippedItem.damage / 10f);
-                Debug.Log(
-                    $"{equippedItem.itemName}이(가) 강화되어 {equippedItem.damage + equippedItem.enchantedDamage} 데미지를 가집니다.");
+               item.insEnchantedDamage += item.insEnchantLevel * (equippedItem.damage / 10f);
+                UIManager.Instance.SystemMessage(
+                    $"{equippedItem.itemName}이(가) 강화되어 {item.insDamage} + {item.insEnchantedDamage} 데미지를 가집니다.");
             }
             else if (equippedItem.itemType == EquipItemType.Armor)
             {
-                equippedItem.enchantedDefense += equippedItem.enchantLevel * (equippedItem.defense / 10f);
-                Debug.Log(
-                    $"{equippedItem.itemName}이(가) 강화되어 {equippedItem.damage + equippedItem.enchantedDefense} 방어력을 가집니다.");
+                item.insEnchantedDefense += item.insEnchantLevel * (equippedItem.defense / 10f);
+
+                UIManager.Instance.SystemMessage(
+                    $"{equippedItem.itemName}이(가) 강화되어 {item.insDefense} + {item.insEnchantedDefense} 방어력을 가집니다.");
             }
         }
     }
@@ -65,16 +66,16 @@ public class ItemDataHandler : SingleTon<ItemDataHandler>
         {
             return;
         }
-       
+
 
         else
         {
-            gm.ModifyStat(StatType.Health,CI.valueAmount);
+            gm.ModifyStat(StatType.Health, CI.valueAmount);
             UIManager.Instance.SystemMessage($"체력이{CI.valueAmount}만큼 회복되었습니다. ");
             if (gm.GetStat(StatType.Health) > gm.GetStat(StatType.MAXHealth))
-                {
+            {
                 gm.SetStat(StatType.Health, gm.GetStat(StatType.MAXHealth));
-                }
+            }
         }
     }
 
@@ -84,13 +85,19 @@ public class ItemDataHandler : SingleTon<ItemDataHandler>
         {
             return;
         }
+
+        var gm = GameManager.Instance.Player.statHandler;
+       
+            gm.ModifyStat(StatType.Damage, item.insDamage);
+            gm.ModifyStat(StatType.EnchantedDamage, item.insEnchantedDamage);
+        
+
         GameObject obj = Instantiate(item.itemData.itemPrefab, GameManager.Instance.Player.weaponPivot.transform);
-       GameManager.Instance.Player.currentEquipmentWeapon = obj;
-       GameManager.Instance.Player.currentEquipmentWeaponData = item;
-       
-           item.isEquipped = true;
-           Debug.Log("아이템 장착");
-       
+        GameManager.Instance.Player.currentEquipmentWeapon = obj;
+        GameManager.Instance.Player.currentEquipmentWeaponData = item;
+
+        item.isEquipped = true;
+        Debug.Log("아이템 장착");
     }
 
     public void UnEquipItem(Item item)
@@ -99,47 +106,47 @@ public class ItemDataHandler : SingleTon<ItemDataHandler>
         {
             return;
         }
-           
-       Destroy(GameManager.Instance.Player.currentEquipmentWeapon); 
-       GameManager.Instance.Player.currentEquipmentWeapon =  null;
-       GameManager.Instance.Player.currentEquipmentWeaponData = null;
-       
-           item.isEquipped = false;
-           Debug.Log("아이템 해제");
-       
+
+        var gm = GameManager.Instance.Player.statHandler;
+        gm.ModifyStat(StatType.Damage,- item.insDamage);
+        gm.ModifyStat(StatType.EnchantedDamage,- item.insEnchantedDamage);
+
+        Destroy(GameManager.Instance.Player.currentEquipmentWeapon);
+        GameManager.Instance.Player.currentEquipmentWeapon = null;
+        GameManager.Instance.Player.currentEquipmentWeaponData = null;
+
+
+        item.isEquipped = false;
+        Debug.Log("아이템 해제");
     }
 
-    
 
     public void Stacked(Item item)
     {
-        if (item.itemData is ResourceItem resourceItem  )
+        if (item.itemData is ResourceItem resourceItem)
         {
             if (resourceItem.isStackable)
             {
                 resourceItem.stackAmount += 1f;
             }
-
         }
         else if (item.itemData is ConsumableItem consumableItem)
         {
-           if (consumableItem.isStackable)
-               {
+            if (consumableItem.isStackable)
+            {
                 consumableItem.stackAmount += 1f;
-               }
+            }
         }
-
     }
 
     public void UnstackItem(Item item)
     {
-        if (item.itemData is ResourceItem resourceItem  )
+        if (item.itemData is ResourceItem resourceItem)
         {
             if (resourceItem.isStackable)
             {
                 resourceItem.stackAmount -= 1f;
             }
-
         }
         else if (item.itemData is ConsumableItem consumableItem)
         {

@@ -49,7 +49,7 @@ public class ItemInfo : MonoBehaviour
 
     public void InitSetInfo()
     {
-        Debug.Log($"[CHECK] itemData 타입: {slot.item.itemData.GetType().Name}, 이름: {slot.item.itemData.itemDataName}");
+        Debug.Log($"[CHECK] itemData 타입: {slot.item.itemData.GetType().Name}, 이름: {slot.item.itemData.itemDataName}, ID:{slot.item.ID}");
         icon.sprite = slot.item.itemData.icon;
         itemName.text = slot.item.itemData.itemName;
         itemDescription.text = slot.item.itemData.description;
@@ -77,22 +77,22 @@ public class ItemInfo : MonoBehaviour
         if (slot.item.itemData is EquipmentItem EI)
         {
             itemType.text = $" 타입 : {EI.itemType.ToString()}";
-            if (EI.enchantLevel == 0)
+            if (slot.item.insEnchantLevel == 0)
             {
-                itemValue1.text = $"공격력 : {EI.damage} ";
-                itemValue2.text = $"방어력 : {EI.defense}";
+                itemValue1.text = $"공격력 : {slot.item.insDamage} ";
+                itemValue2.text = $"방어력 : {slot.item.insDefense}";
             }
             else
             {
                 if (EI.itemType == EquipItemType.Weapon)
                 {
-                    itemValue1.text = $"공격력 : {EI.damage} + <color=#00FFFF>{EI.enchantedDamage}</color>";
-                    itemValue2.text = $"방어력 : {EI.defense}";
+                    itemValue1.text = $"공격력 : {slot.item.insDamage} + <color=#00FFFF>{slot.item.insEnchantedDamage}</color>";
+                    itemValue2.text = $"방어력 : {slot.item.insDefense}";
                 }
                 else if (EI.itemType == EquipItemType.Armor)
                 {
-                    itemValue1.text = $"공격력 : {EI.damage} ";
-                    itemValue2.text = $"방어력 : {EI.defense}+ <color=#00FFFF>{EI.enchantedDefense}</color>";
+                    itemValue1.text = $"공격력 : {slot.item.insDamage} ";
+                    itemValue2.text = $"방어력 : {slot.item.insDefense}+ <color=#00FFFF>{slot.item.insEnchantedDefense}</color>";
                 }
             }
             usingButton.gameObject.SetActive(false);
@@ -174,7 +174,7 @@ public class ItemInfo : MonoBehaviour
         equipButtonText.text = "";
     }
 
-    public void UsingConsumItem()
+    public void OnConsumItem()
     {
         if (slot.item.itemData.useAbleLevel > GameManager.Instance.Player.statHandler.GetStat(StatType.Level))
         {
@@ -220,5 +220,11 @@ public class ItemInfo : MonoBehaviour
             InitSetInfo();
             slot.SetSlot(slot.item);
         }
+    }
+
+    public void OnEnchantItem()
+    {
+        ItemDataHandler.Instance.TryEnchantItem(slot.item);
+        InitSetInfo();
     }
 }
