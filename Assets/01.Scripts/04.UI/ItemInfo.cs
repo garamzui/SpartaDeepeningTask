@@ -15,6 +15,7 @@ public class ItemInfo : MonoBehaviour
     public GameObject equipped;
     public GameObject equipButton;
     public TextMeshProUGUI equipButtonText;
+    public GameObject usingButton;
     public GameObject throwButton;
     public GameObject enchantButton;
     public TextMeshProUGUI itemName;
@@ -94,7 +95,7 @@ public class ItemInfo : MonoBehaviour
                     itemValue2.text = $"방어력 : {EI.defense}+ <color=#00FFFF>{EI.enchantedDefense}</color>";
                 }
             }
-
+            usingButton.gameObject.SetActive(false);
             equipButton.gameObject.SetActive(true);
             enchantButton.gameObject.SetActive(true);
             if (slot.item.isEquipped)
@@ -116,8 +117,8 @@ public class ItemInfo : MonoBehaviour
             itemType.text = $" 타입 : {CI.itemType.ToString()}";
             itemValue1.text = $"회복량 : {CI.valueAmount}";
             itemValue2.text = string.Empty;
-            equipButton.gameObject.SetActive(true);
-            equipButtonText.text = "사용";
+            usingButton.gameObject.SetActive(true);
+            equipButton.gameObject.SetActive(false);
             enchantButton.gameObject.SetActive(false);
             if (CI.isStackable)
             {

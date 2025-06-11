@@ -26,6 +26,7 @@ public Item currentEquipmentArmorData;
      statHandler.ModifyStat(StatType.MAXHealth,10f);
      statHandler.ModifyStat(StatType.NecessaryEXP,10f); 
      statHandler.ModifyStat(StatType.Damage,5f);
+     if(UIManager.Instance.itemInfo.gameObject.activeInHierarchy)
      UIManager.Instance.itemInfo.InitSetInfo();
     }
 

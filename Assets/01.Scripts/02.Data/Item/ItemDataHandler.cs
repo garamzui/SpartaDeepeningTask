@@ -95,7 +95,10 @@ public class ItemDataHandler : SingleTon<ItemDataHandler>
 
     public void UnEquipItem(Item item)
     {
-      
+        if (!(item.itemData is EquipmentItem))
+        {
+            return;
+        }
            
        Destroy(GameManager.Instance.Player.currentEquipmentWeapon); 
        GameManager.Instance.Player.currentEquipmentWeapon =  null;
