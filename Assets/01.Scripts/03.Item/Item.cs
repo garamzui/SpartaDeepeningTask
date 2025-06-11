@@ -19,22 +19,29 @@ public class Item
 
     public Item(ItemName name, int itemID)
     {
-        if (DataManager.Instance.ItemsForName.TryGetValue(name, out var data))
+        if (!DataManager.Instance.ItemsForName.TryGetValue(name, out var data) || data == null)
         {
-            itemData = data;
+            Debug.LogError($"[Item] '{name}' is not found in DataManager.");
+            return; 
         }
-        else
-        {
-            Debug.LogError($"[Item] '{name}'is Null");
-        }
-
+        
+        itemData = data;
+        ID = itemID;
+        
         if (itemData is EquipmentItem EI)
         {
             insDamage = EI.damage;
             insDefense = EI.defense;
             insEnchantPotencial = EI.enchantPotencial;
         }
+        else
+        {
+           
+            insDamage = 0;
+            insDefense = 0;
+            insEnchantPotencial = -1; 
+        }
 
-        ID = itemID;
+       
     }
 }

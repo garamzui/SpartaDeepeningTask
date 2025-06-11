@@ -23,8 +23,10 @@ public class ItemInfo : MonoBehaviour
     public TextMeshProUGUI itemUseableLevel;
     public TextMeshProUGUI tradable;
     public TextMeshProUGUI itemPrice;
-
-
+    public TextMeshProUGUI itemEnchantable;
+    public TextMeshProUGUI itemEnchantPotencial;
+    public TextMeshProUGUI itemEnchantLevel;
+    public TextMeshProUGUI itemGrade;
 //타입별 아이템 필드
     public TextMeshProUGUI itemType;
     public TextMeshProUGUI itemValue1;
@@ -49,14 +51,15 @@ public class ItemInfo : MonoBehaviour
 
     public void InitSetInfo()
     {
-        Debug.Log($"[CHECK] itemData 타입: {slot.item.itemData.GetType().Name}, 이름: {slot.item.itemData.itemDataName}, ID:{slot.item.ID}");
+        Debug.Log(
+            $"[CHECK] itemData 타입: {slot.item.itemData.GetType().Name}, 이름: {slot.item.itemData.itemDataName}, ID:{slot.item.ID}");
         icon.sprite = slot.item.itemData.icon;
         itemName.text = slot.item.itemData.itemName;
         itemDescription.text = slot.item.itemData.description;
 
         if (slot.item.itemData.useAbleLevel > GameManager.Instance.Player.statHandler.GetStat(StatType.Level))
         {
-            itemUseableLevel.text = $"사용 가능 Lv : <color=#FF0000>{slot.item.itemData.useAbleLevel.ToString()}</color>";
+            itemUseableLevel.text = $"<color=#FF0000>사용 가능 Lv : {slot.item.itemData.useAbleLevel.ToString()}</color>";
         }
         else
         {
@@ -76,6 +79,45 @@ public class ItemInfo : MonoBehaviour
 
         if (slot.item.itemData is EquipmentItem EI)
         {
+            if (slot.item.insEnchantPotencial <= 0)
+            {
+                itemEnchantable.text = "<color=#FF0000>강화불가능</color>";
+            }
+            else
+            {
+                itemEnchantable.text = $"강화가능";
+            }
+
+            if (slot.item.insEnchantPotencial == 0)
+            {
+                itemEnchantPotencial.text = "<color=#FF0000>포텐셜 : 0</color>";
+            }
+            else if (slot.item.insEnchantPotencial > 0)
+            {
+                itemEnchantPotencial.text = $"포텐셜 : {slot.item.insEnchantPotencial.ToString()}";
+            }
+            else
+            {
+                itemEnchantPotencial.text = string.Empty;
+            }
+
+            float level = slot.item.insEnchantLevel;
+            float potential = slot.item.insEnchantPotencial;
+
+            if (potential == -1)
+            {itemEnchantLevel.text = string.Empty;}
+            else if (level == 0)
+            {  itemEnchantLevel.text = "+0";}
+            else
+            {  itemEnchantLevel.text = $"<color={GetEnchantColor(level)}>+{level}</color>";}
+
+            if (potential == -1)
+            {itemGrade.text = "고유";}
+            else if (level == 0)
+            {  itemGrade.text = "커먼";}
+            else
+            {  itemGrade.text = $"<color={GetEnchantColor(level)}>+{GetGradeName(level)}</color>";}
+
             itemType.text = $" 타입 : {EI.itemType.ToString()}";
             if (slot.item.insEnchantLevel == 0)
             {
@@ -86,15 +128,18 @@ public class ItemInfo : MonoBehaviour
             {
                 if (EI.itemType == EquipItemType.Weapon)
                 {
-                    itemValue1.text = $"공격력 : {slot.item.insDamage} + <color=#00FFFF>{slot.item.insEnchantedDamage}</color>";
+                    itemValue1.text =
+                        $"공격력 : {slot.item.insDamage} + <color=#00FFFF>{slot.item.insEnchantedDamage}</color>";
                     itemValue2.text = $"방어력 : {slot.item.insDefense}";
                 }
                 else if (EI.itemType == EquipItemType.Armor)
                 {
                     itemValue1.text = $"공격력 : {slot.item.insDamage} ";
-                    itemValue2.text = $"방어력 : {slot.item.insDefense}+ <color=#00FFFF>{slot.item.insEnchantedDefense}</color>";
+                    itemValue2.text =
+                        $"방어력 : {slot.item.insDefense}+ <color=#00FFFF>{slot.item.insEnchantedDefense}</color>";
                 }
             }
+
             usingButton.gameObject.SetActive(false);
             equipButton.gameObject.SetActive(true);
             enchantButton.gameObject.SetActive(true);
@@ -147,6 +192,21 @@ public class ItemInfo : MonoBehaviour
             }
         }
     }
+    private string GetEnchantColor(float level)
+    {
+        if (level < 4) return "#32CD32";
+        if (level < 7) return "#9400D3";
+        if (level < 10) return "#FF00FF";
+        if (level < 13) return "#FFD700";
+        return "#7FFFD4";
+    }private string GetGradeName(float level)
+    {
+        if (level < 4) return "언커먼";
+        if (level < 7) return "레어";
+        if (level < 10) return "유니크";
+        if (level < 13) return "에픽";
+        return "태초";
+    }
 
     private void ResetInfo()
     {
@@ -181,11 +241,13 @@ public class ItemInfo : MonoBehaviour
             UIManager.Instance.SystemMessage("레벨이 부족합니다.");
             return;
         }
-        else if (GameManager.Instance.Player.statHandler.GetStat(StatType.Health) == GameManager.Instance.Player.statHandler.GetStat(StatType.MAXHealth))
+        else if (GameManager.Instance.Player.statHandler.GetStat(StatType.Health) ==
+                 GameManager.Instance.Player.statHandler.GetStat(StatType.MAXHealth))
         {
             UIManager.Instance.SystemMessage($"이미 최대 체력입니다. ");
             return;
         }
+
         ItemDataHandler.Instance.UsingConsumeItem(slot.item);
         slot.ONDestroySlot();
         UIManager.Instance.statusPreView.TextReFresh();

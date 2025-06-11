@@ -11,15 +11,28 @@ public class ItemDataHandler : SingleTon<ItemDataHandler>
 
     public void TryEnchantItem(Item item) //아이템 강화시도 매서드
     {
+        if (item.insEnchantPotencial == 0)
+        {
+            UIManager.Instance.SystemMessage("더 이상 강화가 불가능 합니다.");
+            return;
+        }
+        if (item.insEnchantPotencial ==-1)
+        {
+            UIManager.Instance.SystemMessage("강화 불가능 아이템");
+            return;
+        }
+        
         if (item.itemData is EquipmentItem equippedItem)
         {
-            if (!equippedItem.isEnchantable)
+            
+            
+           
+            float enchantProbabilityPerLevel = 9 - item.insEnchantLevel;
+            if (enchantProbabilityPerLevel <= 2)
             {
-                Debug.Log("이건 강화 못해 이 짜식아"); //추후 UI추가해서 텍스트에 얹기
-                return;
+                enchantProbabilityPerLevel = 2;
             }
 
-            float enchantProbabilityPerLevel = 9 - item.insEnchantLevel;
             float enchantProbability = Random.Range(0, 9);
             if (enchantProbability <= enchantProbabilityPerLevel)
             {
@@ -27,7 +40,8 @@ public class ItemDataHandler : SingleTon<ItemDataHandler>
             }
 
             else
-            {
+            { 
+                item.insEnchantPotencial -=1;
                 UIManager.Instance.SystemMessage("강화 실패!");
             }
         }
@@ -42,7 +56,7 @@ public class ItemDataHandler : SingleTon<ItemDataHandler>
         if (item.itemData is EquipmentItem equippedItem)
         {
             item.insEnchantLevel += 1;
-            item.insEnchantPotencial -=1;
+          
             if (equippedItem.itemType == EquipItemType.Weapon)
             {
                item.insEnchantedDamage += item.insEnchantLevel * (equippedItem.damage / 10f);

@@ -6,7 +6,7 @@ using UnityEngine;
 public class EquipmentItem : ItemData
 {
     public EquipItemType itemType;
-   public bool isEnchantable;
+   
     public float damage;
     public float defense;
     public float enchantPotencial ; 
