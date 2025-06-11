@@ -66,20 +66,24 @@ public class ItemDataHandler : SingleTon<ItemDataHandler>
     {
         GameObject obj = Instantiate(item.itemData.itemPrefab, GameManager.Instance.Player.weaponPivot.transform);
        GameManager.Instance.Player.currentEquipmentWeapon = obj;
-       if (item.itemData is EquipmentItem EI)
-       {
-           EI.isEnchantable = true;
-       }
+       GameManager.Instance.Player.currentEquipmentWeaponData = item;
+       
+           item.isEquipped = true;
+           Debug.Log("아이템 장착");
+       
     }
 
     public void UnEquipItem(Item item)
     {
+      
+           
        Destroy(GameManager.Instance.Player.currentEquipmentWeapon); 
        GameManager.Instance.Player.currentEquipmentWeapon =  null;
-       if (item.itemData is EquipmentItem EI)
-       {
-           EI.isEnchantable = false;
-       }
+       GameManager.Instance.Player.currentEquipmentWeaponData = null;
+       
+           item.isEquipped = false;
+           Debug.Log("아이템 해제");
+       
     }
 
     public void ThrowItem()

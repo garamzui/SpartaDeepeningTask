@@ -37,6 +37,13 @@ public class StatHandler : MonoBehaviour
         }
     }
 
+    public void SetStat(StatType statType, float value)
+    {
+        if (!currentStats.ContainsKey(statType)) return;
+
+        currentStats[statType] = value;
+    }
+
     private IEnumerator RemoveStatAfterDuration(StatType statType, float amount, float duration)
     {
         yield return new WaitForSeconds(duration);
@@ -45,8 +52,5 @@ public class StatHandler : MonoBehaviour
 
     private void LevelHandle()
     {
-        
-        
     }
-
 }

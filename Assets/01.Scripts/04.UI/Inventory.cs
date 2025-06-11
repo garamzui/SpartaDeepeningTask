@@ -68,8 +68,9 @@ public class Inventory : MonoBehaviour
     public void RemoveItem()
     {
         FindOpenSlot();
+        
         slot.GetComponent<Slot>().ONDestroySlot();
-        UIManager.Instance.itemInfo.InfoWIndowOnAndOff();
+        
         if (slots.Count < 9)
         {
             GameObject newSlot = Instantiate(itemSlotPrefab, content.transform);

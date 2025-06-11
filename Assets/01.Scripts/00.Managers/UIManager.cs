@@ -12,9 +12,9 @@ public class UIManager : SingleTon<UIManager>
     public SetButton setButton;
     public StatusPreView statusPreView;
     public Status status;
-    public Image warningImage;
-    public TextMeshProUGUI warningText;
-
+     public Image systemMessageImage;
+     public TextMeshProUGUI systemText;
+     private Coroutine systemMessageRoutine;
     private void Start()
     {
         //매개변수 true넣으면 off되어있는 오브젝트도 찾아올 수 있음 
@@ -26,17 +26,29 @@ public class UIManager : SingleTon<UIManager>
         status = GetComponentInChildren<Status>(true);
     }
 
-    public void WarningMassage(string text)
+    public void SystemMessage(string text)
     {
-        StartCoroutine(Warning(text));
+        if (string.IsNullOrWhiteSpace(text))
+            return; 
+        
+        if (systemMessageRoutine != null)
+        {
+            StopCoroutine(systemMessageRoutine);
+        }
+
+        systemMessageRoutine = StartCoroutine(SystemText(text));
     }
 
-    public IEnumerator Warning(string text)
+    private IEnumerator SystemText(string text)
     {
-        warningText.text = text;
-        warningImage.gameObject.SetActive(true);
-        yield return new WaitForSeconds(2f);
-        warningImage.gameObject.SetActive(false);
-        warningText.text = string.Empty;
+        systemText.text = text;
+        systemMessageImage.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        systemMessageImage.gameObject.SetActive(false);
+        systemText.text = string.Empty;
+
+        systemMessageRoutine = null; 
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New ResourceItem", menuName = "ItemDatas/ResourceItem")]
+[CreateAssetMenu(fileName = "New ResourceItem", menuName = "ResourceItem/ResourceItem")]
 public class ResourceItem : ItemData
 {
     public ResourceType itemType;

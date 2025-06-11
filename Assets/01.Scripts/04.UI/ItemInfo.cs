@@ -34,22 +34,24 @@ public class ItemInfo : MonoBehaviour
         {
             this.gameObject.SetActive(false);
             ResetInfo();
-            
+
             slot = null;
         }
         else if (!this.gameObject.activeInHierarchy)
         {
             this.gameObject.SetActive(true);
-            
+
             InitSetInfo();
         }
     }
 
     public void InitSetInfo()
     {
+        Debug.Log($"[CHECK] itemData 타입: {slot.item.itemData.GetType().Name}, 이름: {slot.item.itemData.itemDataName}");
         icon.sprite = slot.item.itemData.icon;
         itemName.text = slot.item.itemData.itemName;
         itemDescription.text = slot.item.itemData.description;
+
         itemUseableLevel.text = $"사용 가능 Lv : {slot.item.itemData.useAbleLevel.ToString()}";
         if (slot.item.itemData.isTradable)
         {
@@ -84,10 +86,20 @@ public class ItemInfo : MonoBehaviour
                 }
             }
 
-            enchantButton.gameObject.SetActive(true);
             equipButton.gameObject.SetActive(true);
+            enchantButton.gameObject.SetActive(true);
+            if (slot.item.isEquipped)
+            {
+                equipButtonText.text = "장착해제";
+                equipped.SetActive(true);
+            }
+            else
+            {
+                equipButtonText.text = "장착";
+                equipped.SetActive(false);
+            }
 
-           
+            equipButton.gameObject.SetActive(true);
         }
 
         if (slot.item.itemData is ConsumableItem CI)
@@ -95,7 +107,8 @@ public class ItemInfo : MonoBehaviour
             itemType.text = $" 타입 : {CI.itemType.ToString()}";
             itemValue1.text = $"회복량 : {CI.valueAmount}";
             itemValue2.text = string.Empty;
-            equipButton.gameObject.SetActive(false);
+            equipButton.gameObject.SetActive(true);
+            equipButtonText.text = "사용";
             enchantButton.gameObject.SetActive(false);
             if (CI.isStackable)
             {
@@ -153,23 +166,27 @@ public class ItemInfo : MonoBehaviour
 
     public void OnInfoEquipItem()
     {
-        var gm = GameManager.Instance.Player.currentEquipmentWeapon;
+        var gm = GameManager.Instance.Player.currentEquipmentWeaponData;
+
+       
+        
+
         if (gm == null)
         {
             ItemDataHandler.Instance.EquipItem(slot.item);
-            equipped.SetActive(true);
-            slot.equipmentMark.SetActive(true);
-            equipButtonText.text = "장착해제";
-             
+            InitSetInfo();
+            slot.SetSlot(slot.item);
         }
         else
         {
+            if (gm.ID != slot.item.ID)
+            {
+                UIManager.Instance.SystemMessage("먼저 착용하고 있는 장비를 해제 하세요");
+                return;
+            }    
             ItemDataHandler.Instance.UnEquipItem(slot.item);
-            equipped.SetActive(false);
-            slot.equipmentMark.SetActive(false);
-            equipButtonText.text = "장착";
+            InitSetInfo();
+            slot.SetSlot(slot.item);
         }
     }
-    
- 
 }

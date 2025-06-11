@@ -14,6 +14,7 @@ public enum ItemName
     StonePotato
 }
 
+
 public enum EquipItemType
 {
     Weapon,
@@ -41,7 +42,7 @@ public enum ResourceType
 public abstract class ItemData : ScriptableObject
 {
     public ItemName itemDataName;
-   
+    
     public string itemName;
     public string description;
     public int useAbleLevel;

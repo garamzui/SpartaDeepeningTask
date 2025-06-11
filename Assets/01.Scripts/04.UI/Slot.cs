@@ -30,22 +30,40 @@ public class Slot : MonoBehaviour
         icon.sprite = item.itemData.icon;
         if (item.itemData is EquipmentItem EI)
         {
-            if (EI.isEquipped)
+            if (item.isEquipped)
             {
                 equipmentMark.SetActive(true);
+            }
+            else
+            {
+                equipmentMark.SetActive(false);
             }
         }
 
         if ( item.itemData is ResourceItem RI )
         {
-            stackAmountMark.SetActive(true);
-            stackAmountText.text = RI.stackAmount.ToString(); 
+            if (RI.isStackable)
+            {
+                stackAmountMark.SetActive(true);
+                stackAmountText.text = RI.stackAmount.ToString();
+            }
+            else
+            {
+                stackAmountMark.SetActive(false);
+            }
         }
         
         if (item.itemData is ConsumableItem CI)
         {
-            stackAmountMark.SetActive(true);
-            stackAmountText.text = CI.stackAmount.ToString(); 
+            if (CI.isConsumable)
+            {
+                stackAmountMark.SetActive(true);
+                stackAmountText.text = CI.stackAmount.ToString();
+            }
+            else
+            {
+                stackAmountMark.SetActive(false);
+            }
         }
     }
 
@@ -62,13 +80,14 @@ public class Slot : MonoBehaviour
 
             if (item.itemData is EquipmentItem EI)
             {
-                if (EI.isEquipped)
+                if (item.isEquipped)
                 {
                     Debug.Log("아이템 장착을 해제하쇼");
+                    UIManager.Instance.SystemMessage("먼저 아이템 장착을 해제하세요");
                     return;
                 }
             }
-
+            UIManager.Instance.itemInfo.InfoWIndowOnAndOff();
             ResetSlot();
             UIManager.Instance.inventory.slots.Remove(this.gameObject);
             Destroy(this.gameObject);

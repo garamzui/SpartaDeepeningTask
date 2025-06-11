@@ -21,7 +21,6 @@ public class TestUI : MonoBehaviour
         IM = ItemManager.Instance;
         IDH = ItemDataHandler.Instance;
         UIM = UIManager.Instance;
-        
     }
 
     public void OnClickUp()
@@ -46,16 +45,48 @@ public class TestUI : MonoBehaviour
 
     public void OnMoneyPlus()
     {
-        SH.ModifyStat(StatType.Money, 100f,false);
+        SH.ModifyStat(StatType.Money, 100);
+        Debug.Log($"{SH.GetStat(StatType.Money)} ");
         UIM.statusPreView.TextReFresh();
+        UIM.status.SetStatus();
     }
 
     public void OnMoneyMinus()
     {
+        SH.ModifyStat(StatType.Money, -100);
+        Debug.Log($"{SH.GetStat(StatType.Money)} ");
+        UIM.statusPreView.TextReFresh();
+        UIM.status.SetStatus();
     }
 
     public void OnEXPPlus()
     {
+        SH.ModifyStat(StatType.EXP, +10);
+        Debug.Log($"{SH.GetStat(StatType.EXP)} ");
+        if (SH.GetStat(StatType.EXP) >= SH.GetStat(StatType.NecessaryEXP))
+        {
+            SH.SetStat(StatType.EXP, 0);
+            GameManager.Instance.Player.LevelUp();
+            UIM.SystemMessage($"레벨 업\nLevel : {SH.GetStat(StatType.Level) }");
+        }
+
+        UIM.statusPreView.TextReFresh();
+        UIM.status.SetStatus();
+    }
+
+    public void OnHPMinus()
+    {
+        if (SH.GetStat(StatType.Health) <= 10)
+        {
+            SH.SetStat(StatType.Health, 10);
+            UIM.SystemMessage("이러다가 죽어욧");
+            return;
+        }
+        
+        SH.ModifyStat(StatType.Health, -10);
+        Debug.Log($"{SH.GetStat(StatType.Health)} ");
+        UIM.statusPreView.TextReFresh();
+        UIM.status.SetStatus();
     }
 
     public void OnPotato()
@@ -72,7 +103,7 @@ public class TestUI : MonoBehaviour
 
     public void OnWarning()
     {
-        UIM.WarningMassage("워닝 메세지 테스트 입니다");
+        UIM.SystemMessage("시스템 메세지 테스트 입니다");
     }
 
     public void OnSceneReload()

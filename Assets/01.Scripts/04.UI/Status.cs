@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,11 @@ public class Status : MonoBehaviour
         hpText.text = $"체력 : {GM.GetStat(StatType.Health)}/{GM.GetStat(StatType.MAXHealth)}";
         damageText.text = $"공격력 :  {GM.GetStat(StatType.Damage)} <color=#00FFFF>+{GM.GetStat(StatType.EnchantedDamage)} </color>";
         defenceText.text =$"방어력 :  {GM.GetStat(StatType.Defence)} <color=#00FFFF>+ {GM.GetStat(StatType.EnchantedDefence)}</color>";
+    }
+
+    private void OnEnable()
+    {
+        SetStatus();
     }
 }
 
